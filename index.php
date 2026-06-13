@@ -107,7 +107,7 @@
 
         <div class="fixed bottom-6 right-6 z-40 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg border border-romance flex items-center space-x-3">
             <audio id="bg-music" loop>
-                <source src="our-song.mp3" type="audio/mpeg">
+                <source src="song.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
             <button id="music-toggle" onclick="toggleMusic()" class="w-10 h-10 bg-softPink text-white rounded-full flex items-center justify-center animate-pulse shadow-md focus:outline-none">
@@ -118,7 +118,7 @@
 
         <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=1920" 
+                <img src="bg.jpg" 
                      alt="Our Love Background" class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-softPink/40 to-blush"></div>
             </div>
@@ -519,7 +519,7 @@
             const btn = document.getElementById('reveal-btn');
             
             secretDiv.classList.remove('hidden');
-            setTimeout(() => {
+            setTimeout(() => {  
                 secretDiv.classList.remove('opacity-0', 'scale-95');
                 secretDiv.classList.add('opacity-100', 'scale-100');
             }, 50);
