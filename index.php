@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary, My Love ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blush: '#FFF0F2',
+                        romance: '#FFD3DA',
+                        roseGold: '#B76E79',
+                        softPink: '#FFB7C5',
+                        lavenderAccent: '#E6E6FA',
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        cursive: ['Dancing Script', 'cursive'],
+                        elegant: ['Great Vibes', 'cursive'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
+        }
+        .floating-heart {
+            position: absolute;
+            animation: floatUp 8s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FFF0F2; }
+        ::-webkit-scrollbar-thumb { background: #FFB7C5; border-radius: 4px; }
+        
+        /* Card Flip Style */
+        .flip-card { perspective: 1000px; }
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        .flip-card-back { transform: rotateY(180deg); }
+    </style>
+</head>
+<body class="bg-blush text-gray-700 font-sans overflow-x-hidden">
+
+    <div id="hearts-bg" class="fixed inset-0 pointer-events-none z-0 hidden"></div>
+
+    <div id="pin-screen" class="fixed inset-0 bg-gradient-to-tr from-blush via-romance to-lavenderAccent z-50 flex flex-col justify-center items-center p-4 transition-all duration-1000">
+        <div class="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-xl max-w-md w-full text-center border border-white/50 space-y-6">
+            <div class="relative inline-block animate-bounce">
+                <i class="fa-solid fa-heart text-6xl text-softPink drop-shadow-md"></i>
+                <i class="fa-solid fa-lock absolute inset-0 flex items-center justify-center text-white text-xl pt-1"></i>
+            </div>
+            
+            <div class="space-y-2">
+                <h1 class="font-elegant text-5xl text-roseGold">Happy Monthsary, My Love ❤️</h1>
+                <p class="font-light text-sm text-gray-500 tracking-wide">A Special Surprise Just For You 💕</p>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <p class="text-sm font-medium text-gray-600">Enter our special anniversary code to enter:</p>
+                <input type="password" id="pin-input" maxlength="4" placeholder="••••" 
+                       class="w-40 text-center text-2xl tracking-widest font-bold py-3 px-4 border-2 border-romance rounded-full bg-white text-roseGold focus:outline-none focus:border-softPink transition-all shadow-sm">
+                
+                <div id="pin-error" class="text-xs text-rose-500 font-medium h-4 opacity-0 transition-opacity duration-300">
+                    Oops! That's not our special code 💖
+                </div>
+
+                <button onclick="checkPin()" class="w-full bg-gradient-to-r from-softPink to-roseGold text-white font-semibold py-3 rounded-full shadow-md hover:opacity-90 active:scale-95 transition-all tracking-wide">
+                    Unlock Our Memories <i class="fa-solid fa-sparkles ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="hidden relative z-10">
+
+        <div class="fixed bottom-6 right-6 z-40 bg-white/90 backdrop-blur-sm p-3 rounded-full shadow-lg border border-romance flex items-center space-x-3">
+            <audio id="bg-music" loop>
+                <source src="our-song.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <button id="music-toggle" onclick="toggleMusic()" class="w-10 h-10 bg-softPink text-white rounded-full flex items-center justify-center animate-pulse shadow-md focus:outline-none">
+                <i id="music-icon" class="fa-solid fa-music"></i>
+            </button>
+            <span id="music-text" class="text-xs font-medium text-gray-600 pr-2 hidden md:inline">Play Our Song 🎵</span>
+        </div>
+
+        <header class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=1920" 
+                     alt="Our Love Background" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-softPink/40 to-blush"></div>
+            </div>
+
+            <div class="relative z-10 px-4 max-w-4xl space-y-6">
+                <span class="text-white text-lg tracking-widest font-medium uppercase drop-shadow-sm">To My Most Beautiful</span>
+                <h1 class="font-elegant text-7xl md:text-9xl text-white drop-shadow-md">Princess Name</h1>
+                
+                <p class="font-serif italic text-lg md:text-2xl text-white/90 max-w-xl mx-auto drop-shadow-sm">
+                    "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
+                </p>
+
+                <div class="bg-white/20 backdrop-blur-md inline-block px-6 py-4 rounded-3xl border border-white/30 text-white mt-4 shadow-lg">
+                    <p class="text-xs uppercase tracking-widest mb-2 font-medium">Time spent loving you:</p>
+                    <div class="flex space-x-4 text-center">
+                        <div>
+                            <span id="days" class="text-2xl md:text-4xl font-bold">00</span>
+                            <p class="text-[10px] uppercase">Days</p>
+                        </div>
+                        <span class="text-2xl md:text-4xl font-light">:</span>
+                        <div>
+                            <span id="hours" class="text-2xl md:text-4xl font-bold">00</span>
+                            <p class="text-[10px] uppercase">Hours</p>
+                        </div>
+                        <span class="text-2xl md:text-4xl font-light">:</span>
+                        <div>
+                            <span id="minutes" class="text-2xl md:text-4xl font-bold">00</span>
+                            <p class="text-[10px] uppercase">Mins</p>
+                        </div>
+                        <span class="text-2xl md:text-4xl font-light">:</span>
+                        <div>
+                            <span id="seconds" class="text-2xl md:text-4xl font-bold">00</span>
+                            <p class="text-[10px] uppercase">Secs</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8">
+                    <a href="#love-letter" class="text-white text-sm tracking-widest font-medium uppercase border-b-2 border-white/50 pb-2 hover:border-white transition-all">
+                        Read My Letter <i class="fa-solid fa-chevron-down ml-1 animate-bounce"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section id="love-letter" class="py-20 px-4 max-w-3xl mx-auto text-center relative">
+            <div class="bg-white p-8 md:p-16 rounded-[2rem] shadow-xl border border-romance/50 relative transform rotate-[-1deg]">
+                <div class="absolute -top-5 -left-5 text-4xl text-romance transform -rotate-12"><i class="fa-solid fa-envelope-open-text"></i></div>
+                <div class="absolute -bottom-5 -right-5 text-4xl text-romance transform rotate-12"><i class="fa-solid fa-heart"></i></div>
+
+                <h2 class="font-cursive text-4xl md:text-5xl text-roseGold mb-8">Dearest Love,</h2>
+                
+                <div class="font-serif text-base md:text-lg text-gray-600 leading-relaxed space-y-6 text-left max-w-xl mx-auto">
+                    <p>
+                        Happy Monthsary! Words often fail to describe exactly how much you mean to me, but today, I wanted to build this little corner of the digital universe just to showcase a fraction of my love for you.
+                    </p>
+                    
+                    <div class="flex justify-center my-4 text-softPink text-xs space-x-2">
+                        <i class="fa-solid fa-heart"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <p>
+                        Every single day spent with you feels like an absolute dream come true. From our late-night silly conversations to the quiet moments where we just hold hands, everything becomes a precious memory that I keep safely tucked inside my heart.
+                    </p>
+
+                    <div class="flex justify-center my-4 text-softPink text-xs space-x-2">
+                        <i class="fa-solid fa-heart"></i><i class="fa-solid fa-heart"></i><i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <p>
+                        Thank you for your unending patience, your beautiful radiant smile, and for being my ultimate safe haven. I promise to keep loving you, protecting you, and cheering you on through every phase of life. Here is to this month, and all the infinity months ahead of us.
+                    </p>
+                </div>
+
+                <div class="mt-10 text-right max-w-xl mx-auto">
+                    <p class="font-cursive text-3xl text-roseGold">Forever Yours,</p>
+                    <p class="font-medium tracking-wider text-sm text-gray-500 uppercase mt-1">Your Name</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gradient-to-b from-blush to-white px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="font-elegant text-5xl text-roseGold">Reasons Why I Love You</h2>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 mt-2">Just a few out of millions</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="flip-card h-48 w-full cursor-pointer">
+                        <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-md border border-romance bg-white">
+                            <div class="flip-card-front absolute inset-0 flex flex-col justify-center items-center p-4">
+                                <i class="fa-solid fa-face-smile text-3xl text-softPink mb-3"></i>
+                                <h3 class="font-semibold text-gray-700">Your Smile</h3>
+                            </div>
+                            <div class="flip-card-back absolute inset-0 bg-softPink rounded-2xl p-6 flex items-center justify-center text-white">
+                                <p class="text-sm font-medium">The way your eyes crinkle and how your laugh completely lights up even my darkest days.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card h-48 w-full cursor-pointer">
+                        <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-md border border-romance bg-white">
+                            <div class="flip-card-front absolute inset-0 flex flex-col justify-center items-center p-4">
+                                <i class="fa-solid fa-hand-holding-heart text-3xl text-softPink mb-3"></i>
+                                <h3 class="font-semibold text-gray-700">Your Kindness</h3>
+                            </div>
+                            <div class="flip-card-back absolute inset-0 bg-softPink rounded-2xl p-6 flex items-center justify-center text-white">
+                                <p class="text-sm font-medium">How deeply you care for people around you, always showing endless empathy and pure warmth.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card h-48 w-full cursor-pointer">
+                        <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-md border border-romance bg-white">
+                            <div class="flip-card-front absolute inset-0 flex flex-col justify-center items-center p-4">
+                                <i class="fa-solid fa-shield-heart text-3xl text-softPink mb-3"></i>
+                                <h3 class="font-semibold text-gray-700">Your Support</h3>
+                            </div>
+                            <div class="flip-card-back absolute inset-0 bg-softPink rounded-2xl p-6 flex items-center justify-center text-white">
+                                <p class="text-sm font-medium">You are my biggest cheerleader. You always believe in me, even when I struggle to believe in myself.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card h-48 w-full cursor-pointer">
+                        <div class="flip-card-inner relative w-full h-full text-center rounded-2xl shadow-md border border-romance bg-white">
+                            <div class="flip-card-front absolute inset-0 flex flex-col justify-center items-center p-4">
+                                <i class="fa-solid fa-bolt text-3xl text-softPink mb-3"></i>
+                                <h3 class="font-semibold text-gray-700">Your Laughter</h3>
+                            </div>
+                            <div class="flip-card-back absolute inset-0 bg-softPink rounded-2xl p-6 flex items-center justify-center text-white">
+                                <p class="text-sm font-medium">Making you laugh is my absolute favorite hobby. Your joy is completely contagious.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-white px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="font-elegant text-5xl text-roseGold">Our Beautiful Memories</h2>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 mt-2">Captured moments of our journey</p>
+                </div>
+
+                <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Beautiful Moment together" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">The Day We Smiled Forever ✨</p>
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80" alt="Your stunning portrait" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">Your laugh is my favorite sound 💖</p>
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=600&q=80" alt="Sweet date adventure" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">Our spontaneous coffee runaway ☕</p>
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?auto=format&fit=crop&w=600&q=80" alt="Holding hands tight" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">Never letting go of this hand 🤝</p>
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1501901604258-bb64e2551a48?auto=format&fit=crop&w=600&q=80" alt="Sunset Date view" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">Watching golden hours with you 🌅</p>
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Cute profile picture" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">The most stunning girl alive 😍</p>
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1537655780520-1e392edd816a?auto=format&fit=crop&w=600&q=80" alt="Amusement Park trip" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">Fun times and sweet treats 🎡</p>
+                        </div>
+                    </div>
+                    <div class="break-inside-avoid relative group overflow-hidden rounded-2xl shadow-sm cursor-pointer border border-gray-100" onclick="openLightbox(this)">
+                        <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=600&q=80" alt="Beautiful roadtrip snapshot" class="w-full transform group-hover:scale-105 transition-transform duration-500 rounded-2xl">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <p class="text-white text-xs font-medium">To any destination, as long as it's you 🚗</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden flex flex-col justify-center items-center p-4" onclick="closeLightbox()">
+            <button class="absolute top-6 right-6 text-white text-3xl opacity-70 hover:opacity-100"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lightbox-img" src="" alt="Enlarged" class="max-w-full max-h-[85vh] rounded-lg shadow-2xl">
+            <p id="lightbox-caption" class="text-white/80 text-sm mt-4 tracking-wide font-light"></p>
+        </div>
+
+        <section class="py-16 bg-gradient-to-b from-white to-blush px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-elegant text-5xl text-roseGold">Our Milestone Story</h2>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 mt-2">Every beautiful moment that led us here</p>
+                </div>
+
+                <div class="relative border-l-2 border-romance mx-auto max-w-xl pl-6 space-y-12">
+                    
+                    <div class="relative group">
+                        <div class="absolute -left-[31px] top-1 bg-white border-2 border-softPink w-4 h-4 rounded-full group-hover:bg-softPink transition-all"></div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-romance/30 hover:shadow-md transition-all">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-softPink block mb-1">Chapter 1 — Month Day, Year</span>
+                            <h3 class="text-lg font-bold text-gray-700 mb-2">Our First Conversation 👋</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">It started with a simple hello, but little did I know that single interaction would completely transform my life forever.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute -left-[31px] top-1 bg-white border-2 border-softPink w-4 h-4 rounded-full group-hover:bg-softPink transition-all"></div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-romance/30 hover:shadow-md transition-all">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-softPink block mb-1">Chapter 2 — Month Day, Year</span>
+                            <h3 class="text-lg font-bold text-gray-700 mb-2">The Magical First Date ☕</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Seeing you walk towards me made my heart skip beats. Time absolutely flew by as we sat and talked for hours.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute -left-[31px] top-1 bg-white border-2 border-softPink w-4 h-4 rounded-full group-hover:bg-softPink transition-all"></div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-romance/30 hover:shadow-md transition-all">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-softPink block mb-1">Chapter 3 — Month Day, Year</span>
+                            <h3 class="text-lg font-bold text-gray-700 mb-2">First Picture Together 📸</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Both of us looking a little bit shy but incredibly happy. The very first physical evidence of our sweet chemistry.</p>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute -left-[31px] top-1 bg-white border-2 border-softPink w-4 h-4 rounded-full group-hover:bg-softPink transition-all"></div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-romance/30 hover:shadow-md transition-all">
+                            <span class="text-xs font-semibold uppercase tracking-wider text-softPink block mb-1">Chapter 4 — Today</span>
+                            <h3 class="text-lg font-bold text-gray-700 mb-2">Celebrating Our Monthsary 🎉</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Another beautiful milestone achieved together. Each month makes me realize how truly lucky I am to call you mine.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 text-center px-4 max-w-xl mx-auto">
+            <div class="bg-gradient-to-tr from-white to-romance/40 p-8 rounded-[2rem] shadow-xl border border-white space-y-6">
+                <div class="inline-block animate-pulse-slow">
+                    <i class="fa-solid fa-heart text-7xl text-softPink drop-shadow-sm"></i>
+                </div>
+                
+                <h2 class="font-elegant text-5xl text-roseGold">One Last Secret...</h2>
+                <p class="text-sm text-gray-500 leading-relaxed">I have hidden a final personalized message just for you inside this box.</p>
+
+                <button id="reveal-btn" onclick="revealSecret()" class="bg-gradient-to-r from-softPink to-roseGold text-white font-semibold py-3 px-8 rounded-full shadow-md hover:scale-105 transition-all">
+                    Click For My Final Message ❤️
+                </button>
+
+                <div id="secret-message" class="hidden transition-all duration-1000 transform opacity-0 scale-95 border-t border-romance/50 pt-6 mt-6">
+                    <p class="font-cursive text-3xl text-roseGold mb-3">You are my today and all of my tomorrows.</p>
+                    <p class="text-sm text-gray-600 leading-relaxed font-serif">
+                        No matter how far we go, or what obstacles come our way, my heart will always navigate its path back to you. I love you more than words could ever convey. Happy Monthsary, sweetheart! 🌹
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="bg-white border-t border-romance text-center py-8 px-4 text-gray-400 text-xs tracking-wider space-y-1">
+            <p>Made with <i class="fa-solid fa-heart text-softPink animate-pulse"></i> for the love of my life.</p>
+            <p class="font-medium text-gray-500">Your Name & Her Name</p>
+            <p class="text-[10px]">Our Special Date: Month Day, Year</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // 1. PIN LOCK FUNCTIONALITY
+        function checkPin() {
+            const pinInput = document.getElementById('pin-input').value;
+            const errorMsg = document.getElementById('pin-error');
+            const pinScreen = document.getElementById('pin-screen');
+            const mainContent = document.getElementById('main-content');
+            const heartsBg = document.getElementById('hearts-bg');
+
+            // CHANGE YOUR 4-DIGIT PIN HERE
+            const correctPin = "1214"; 
+
+            if(pinInput === correctPin) {
+                // Smooth transition fade-out screen
+                pinScreen.classList.add('opacity-0', 'pointer-events-none');
+                mainContent.classList.remove('hidden');
+                heartsBg.classList.remove('hidden');
+                
+                // Initialize Background heart effects
+                createFloatingHearts();
+                
+                // Try playing audio (will respect browser policy restrictions)
+                toggleMusic(true);
+            } else {
+                errorMsg.classList.remove('opacity-0');
+                document.getElementById('pin-input').value = '';
+                // Shake effect fallback
+                document.getElementById('pin-input').classList.add('border-rose-500');
+                setTimeout(() => {
+                    document.getElementById('pin-input').classList.remove('border-rose-500');
+                }, 1000);
+            }
+        }
+
+        // 2. AUDIO MUSIC PLAYER CONTROLLER
+        const audio = document.getElementById('bg-music');
+        const musicIcon = document.getElementById('music-icon');
+        const musicText = document.getElementById('music-text');
+
+        function toggleMusic(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    musicIcon.className = "fa-solid fa-pause";
+                    musicText.innerText = "Playing Our Song 🎵";
+                }).catch(e => {
+                    console.log("Autoplay blocked by browser. User must click manually.");
+                });
+            } else {
+                audio.pause();
+                musicIcon.className = "fa-solid fa-music";
+                musicText.innerText = "Play Our Song 🎵";
+            }
+        }
+
+        // 3. COUNTDOWN TIMER CONFIGURATION
+        // SET YOUR ANNIVERSARY/START DATE HERE
+        const relationshipStartDate = new Date("December 14, 2024 00:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = now - relationshipStartDate; // Calculate time forward from start date
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+        setInterval(updateCountdown, 1000);
+
+        // 4. FLOATING BACKGROUND HEARTS 
+        function createFloatingHearts() {
+            const container = document.getElementById('hearts-bg');
+            const heartIcons = ['fa-heart', 'fa-sparkles', 'fa-seedling'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart', 'text-softPink', 'opacity-60');
+                
+                // Randomly choose looks
+                heart.innerHTML = `<i class="fa-solid fa-heart"></i>`;
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 15 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 4 + 5 + 's'; // Between 5s to 9s
+                
+                container.appendChild(heart);
+
+                // Clear element to save DOM resources
+                setTimeout(() => {
+                    heart.remove();
+                }, 9000);
+            }, 600);
+        }
+
+        // 5. LIGHTBOX CONTROLLER
+        function openLightbox(element) {
+            const src = element.querySelector('img').src;
+            const caption = element.querySelector('p') ? element.querySelector('p').innerText : "";
+            
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-caption').innerText = caption;
+            document.getElementById('lightbox').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+        }
+
+        // 6. FINAL SURPRISE REVEAL
+        function revealSecret() {
+            const secretDiv = document.getElementById('secret-message');
+            const btn = document.getElementById('reveal-btn');
+            
+            secretDiv.classList.remove('hidden');
+            setTimeout(() => {
+                secretDiv.classList.remove('opacity-0', 'scale-95');
+                secretDiv.classList.add('opacity-100', 'scale-100');
+            }, 50);
+
+            btn.innerHTML = "I Love You Forever ❤️";
+            btn.classList.add('pointer-events-none', 'opacity-80');
+        }
+    </script>
+</body>
+</html>
